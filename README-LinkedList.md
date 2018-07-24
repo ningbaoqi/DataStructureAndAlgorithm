@@ -189,5 +189,45 @@ public class StackUtil {
 }
 
 ```
+#### 删除单链表中的指定节点
 
+```
 
+public class StackUtil {
+
+    class Node {
+        int data;
+        Node next;
+
+        public Node(int data) {
+            this.data = data;
+        }
+    }
+
+    /**
+     * 删除单链表中的指定节点
+     * 根据所要删除的节点找到它后面的节点，然后将后面节点的data域赋值给当前节点的data域，同时要保证当前节点指向后面节点的后面节点，这样就能保证整个链是不断开的,实现了删除指定节点的功能
+     */
+    public static void deleteNode(Node head, Node node) {
+        //删除尾节点，采用顺序查找找到尾节点的前一节点
+        if (node.next == null) {
+            while (head.next != node) {//遍历找到尾部节点
+                head = head.next;
+            }
+            head.next = null;
+        }
+
+        //要删除的节点是头节点
+        else if (head == node) {
+            head = null;
+        }
+        //要删除的节点是中间普通节点
+        else {
+            Node q = node.next;
+            node.data = q.data;
+            node.next = q.next;
+        }
+    }
+}
+
+```
