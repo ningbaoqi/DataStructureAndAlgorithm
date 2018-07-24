@@ -130,3 +130,64 @@
         }
     }
 ```
+#### 单链表中删除指定数值的节点
+
+```
+
+public class StackUtil {
+
+    class Node {
+        int data;
+        Node next;
+
+        public Node(int data) {
+            this.data = data;
+        }
+    }
+
+    /**
+     * 单链表中删除指定数值的节点：方法一： 利用栈 : 将不等于num的值的节点利用栈，全部收集起来，收集完成之后，把全部链接起来，形成一个 新的链表
+     */
+    public Node removeValue1(Node head, int num) {
+        Stack<Node> stack = new Stack<>();
+        while (head != null) {
+            if (head.data != num) {
+                stack.push(head);//进栈
+            }
+            head = head.next;
+        }
+        while (!stack.isEmpty()) {//生成新的链表
+            stack.peek().next = head;//获取栈顶元素，但不出栈
+            head = stack.pop();//出栈
+        }
+        return head;
+    }
+
+    /**
+     * 单链表中删除指定数值的节点方法二：不利用栈
+     */
+    public Node removeValue2(Node head, int num) {
+        while (head != null) {//找到第一个不等于的节点，需要保留的节点，作为新链表的首节点
+            if (head.data != num) {
+                break;
+            }
+            head = head.next;
+        }
+        Node pre = head;
+        Node cur = head;
+        while (cur != null) {
+            if (cur.data == num) {
+                pre.next = cur.next;
+            } else {
+                pre = cur;
+            }
+            cur = cur.next;
+        }
+        return head;
+        
+    }
+}
+
+```
+
+
