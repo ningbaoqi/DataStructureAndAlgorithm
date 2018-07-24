@@ -1,2 +1,2 @@
 ### 数据结构
-[数据结构](https://github.com/ningbaoqi/Tools/blob/master/README-ADB.md)
+[数据结构](https://github.com/ningbaoqi/DataStructureAndAlgorithm/blob/master/README-DataStructure%20.md)
