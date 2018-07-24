@@ -107,3 +107,59 @@ public static void postorderTraversal(TreeNode root) {
     }
 ```
 
+#### 分层遍历二叉树
+```
+    /**
+     * 分层遍历二叉树迭代，（宽度优先遍历)
+     *
+     * @param root
+     */
+    public static void levelTraversal(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        LinkedList<TreeNode> quequ = new LinkedList<>();
+        quequ.push(root);
+        while (!quequ.isEmpty()) {
+            TreeNode cur = quequ.removeFirst();
+            if (cur.left != null) {
+                quequ.add(cur.left);
+            }
+            if (cur.right != null) {
+                quequ.add(cur.right);
+            }
+        }
+    }
+```
+##### 分层遍历应用：按层打印二叉树
+```
+    /**
+     * 分层遍历应用：按层打印二叉树
+     *
+     * @param root
+     * @return
+     */
+    public ArrayList<Integer> printFromTopToBottom(TreeNode root) {
+        ArrayList<Integer> list = new ArrayList<>();
+        Queue<TreeNode> queue = new ArrayBlockingQueue<TreeNode>(100);
+        TreeNode last = root;//当前行的最右节点
+        TreeNode nLast = root;//下一行的最右节点
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            TreeNode out = queue.poll();
+            list.add(out.val);
+            if (out.left != null) {
+                queue.add(out.left);
+                nLast = out.left;
+            }
+            if (out.right != null) {
+                queue.add(out.right);
+                nLast = out.right;
+            }
+            if (out == last) {
+                last = nLast;
+            }
+        }
+        return list;
+    }
+```
