@@ -27,3 +27,45 @@ public static void postorderTraversal(TreeNode root) {
     }
 }
 ```
+#### 中序遍历
+
+```
+    /**
+     * 中序遍历：递归
+     *
+     * @param root
+     */
+    public static void inorderTraversalRec(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        inorderTraversalRec(root.left);
+        inorderTraversalRec(root.right);
+    }
+
+    /**
+     * 中序遍历：迭代
+     *
+     * @param root
+     */
+    public static void inorderTraversal(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode cur = root;
+        if (cur != null) {
+            while (!stack.isEmpty() || cur != null) {
+                if (cur != null) {
+                    stack.push(cur);
+                    cur = cur.left;
+                } else {
+                    cur = stack.pop();
+                    cur = cur.right;
+                }
+            }
+        }
+    }
+```
+
+
