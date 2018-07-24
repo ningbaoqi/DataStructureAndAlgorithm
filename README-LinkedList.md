@@ -102,5 +102,31 @@
         }
         return node;
     }
+```
+#### 删除单链表中数值重复出现的节点
 
+```
+    /**
+     * 删除单链表中数值重复出现的节点
+     *
+     * @param head
+     */
+    public void deleteDuplication(Node head) {
+        if (head == null) {
+            return;
+        }
+        HashSet<Integer> set = new HashSet<>();
+        Node pre = head;
+        Node cur = head.next;
+        set.add(head.data);
+        while (cur != null) {
+            if (set.contains(cur.data)) {
+                pre.next = cur.next;
+            } else {
+                set.add(cur.data);
+                pre = cur;
+            }
+            cur = cur.next;
+        }
+    }
 ```
