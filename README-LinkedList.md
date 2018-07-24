@@ -58,3 +58,49 @@
     }
 ```
 
+#### 两个单链表生成相加链表
+
+```
+
+    /**
+     * 两个单链表生成相加链表
+     *
+     * @param head1
+     * @param head2
+     * @return
+     */
+    public Node addList2(Node head1, Node head2) {
+        Stack<Integer> stack1 = new Stack<>();
+        Stack<Integer> stack2 = new Stack<>();
+        while (head1 != null) {
+            stack1.push(head1.data);
+            head1 = head1.next;
+        }
+        while (head2 != null) {
+            stack2.push(head2.data);
+            head2 = head2.next;
+        }
+        int n1 = 0;//链表1的数据
+        int n2 = 0;//链表2的数据
+        int n = 0;//n1+n2+ca
+        int ca = 0;//进位
+        Node node = null;//当前节点
+        Node pNode = null;//当前节点的前驱节点
+        while (!stack1.isEmpty() || !stack2.isEmpty()) {
+            n1 = stack1.isEmpty() ? 0 : stack1.pop();
+            n2 = stack2.isEmpty() ? 0 : stack2.pop();
+            n = n1 + n2 + ca;
+            node = new Node(n % 10);
+            node.next = pNode;
+            pNode = node;
+            ca = n / 10;
+        }
+        if (ca == 1) {
+            pNode = node;
+            node = new Node(n / 10);
+            node.next = pNode;
+        }
+        return node;
+    }
+
+```
