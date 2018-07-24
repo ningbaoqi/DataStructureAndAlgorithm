@@ -67,5 +67,43 @@ public static void postorderTraversal(TreeNode root) {
         }
     }
 ```
+#### 前序遍历二叉树
+```
+    /**
+     * 前序遍历：递归
+     *
+     * @param root
+     */
+    public static void preorderTraversalRec(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        preorderTraversalRec(root.left);
+        preorderTraversalRec(root.right);
+    }
+```
 
+```
+    /**
+     * 前序遍历 迭代
+     *
+     * @param root
+     */
+    public static void preorderTraversal(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode cur = stack.pop();//出栈栈顶元素
+            if (cur.right != null) {//关键点：要先压入右孩子，再压入左孩子，这样在出栈时会先打印左孩子再打印右孩子
+                stack.push(cur.right);
+            }
+            if (cur.left != null) {
+                stack.push(cur.left);
+            }
+        }
+    }
+```
 
